@@ -14,32 +14,32 @@ class EnderecoController extends Controller
         return $endereco;
     }
 
-    public function BuscarPorCepOuLogradouro($filtro)
+    public function BuscarPorCepOuLogradouro(Request $request)
     {
+
+        $filtro = $request->query('filtro');
         $endereco = Endereco::where('cep', $filtro)
-            ->orWhere('logradouro',$filtro)
-            ->first();
-        if ($endereco == null) {
-            throw new Exception('Endereço não encontrado verifique os dados informados.');
-        }
+            ->orWhere('logradouro','like','%'.$filtro.'%')->get();
         return $endereco;
     }
 
     public function Inserir(Request $request)
     {
+        try{
+        $this->ValidarCep($request->cep);
         $endereco = new Endereco;
-
         $endereco->cep = $request->cep;
         $endereco->logradouro = $request->logradouro;
-        $endereco->numero = $request->numero;
         $endereco->bairro = $request->bairro;
-        $endereco->complemento = $request->complemento;
         $endereco->cidade = $request->cidade;
-        $endereco->estado = $request->estado;
+        $endereco->uf = $request->uf;
 
         $endereco->save();
 
         return $endereco;
+        }catch(Exception $ex){
+            return response()->json(['message'=>$ex->getMessage()],400);
+        }
     }
 
     public function Atualizar($id, Request $request)
@@ -49,11 +49,9 @@ class EnderecoController extends Controller
 
             $endereco->cep = $request->cep;
             $endereco->logradouro = $request->logradouro;
-            $endereco->numero = $request->numero;
             $endereco->bairro = $request->bairro;
-            $endereco->complemento = $request->complemento;
             $endereco->cidade = $request->cidade;
-            $endereco->estado = $request->estado;
+            $endereco->uf = $request->uf;
 
             $endereco->save();
 
@@ -73,6 +71,11 @@ class EnderecoController extends Controller
         }
     }
 
+    public function buscarPorId($id){
+        $endereco = Endereco::find($id);
+        return $endereco;
+    }
+
     private function ValidarId($id)
     {
         $endereco = Endereco::find($id);
@@ -80,6 +83,13 @@ class EnderecoController extends Controller
             throw new Exception('Esse número de registro Id não existe na base de dados.');
         } else {
             return $endereco;
+        }
+    }
+
+    private function ValidarCep($cep){
+        $endereco = Endereco::where('cep', $cep)->first();
+        if ($endereco != null) {
+            throw new Exception('Esse cep já está cadastrado');
         }
     }
 }

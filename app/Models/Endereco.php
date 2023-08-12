@@ -12,10 +12,8 @@ class Endereco extends Model
     protected $fillable = [
         'cep',
         'logradouro',
-        'numero',
         'bairro',
-        'complemento',
         'cidade',
-        'estado'
+        'uf'
     ];
 }
