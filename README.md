@@ -29,6 +29,8 @@ Siga as etapas abaixo para executar o projeto:
     - Instale o Composer (gerenciador de dependências do PHP) seguindo as instruções em https://getcomposer.org.
     - Navegue até o diretório do projeto onde está localizado o arquivo composer.json.
     - Execute o seguinte comando para instalar as dependências:
+    
+        ```bash
         composer install
 
 4. Crie o arquivo .env utilizando o arquivo .env.example, com os dados de conexão com o Banco de Dados, neste projeto foi utilizado o MYSQL.
