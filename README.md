@@ -29,7 +29,7 @@ Siga as etapas abaixo para executar o projeto:
     - Instale o Composer (gerenciador de dependências do PHP) seguindo as instruções em https://getcomposer.org.
     - Navegue até o diretório do projeto onde está localizado o arquivo composer.json.
     - Execute o seguinte comando para instalar as dependências:
-    
+
         ```bash
         composer install
 
@@ -48,6 +48,6 @@ Siga as etapas abaixo para executar o projeto:
 7. Link Postman para que possa testar o projeto com as rotas e valores de teste.
 
     ```bash
-    https://api.postman.com/collections/
+    https://api.postman.com/collections/3894449-bd5dd078-53b6-47a4-9048-6ec102921d0d?access_key=PMAT-01H7NWS6C6RRNWCBFBETWS156B
 
 
